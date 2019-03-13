@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
+
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Genres</p>
+            <div class="list-group">
+                {% for genre in genres %}
+                    <a href="{{url_for('showGenreBooks', genre_name=genre.name)}}" class="list-group-item">{{genre.name}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="no-margin">{{chosenGenre.name}}</h2>
+                    </div>
+                </div>
+                <hr>
+                <div class="row is-flex">
+                    {% for i in books %}
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                            <div class="gallery">
+                                <img class="img-responsive" src="{{ i.image }}" alt="{{ i.name }}">
+                                <h4 class="text-center">{{i.name}}</h4>
+                                <div class="text-center">
+                                <p><a class="btn btn-default"
+                                      href="{{url_for('showBook', genre_name=i.genre.name, book_name=i.name)}}"
+                                      role="button">View details
+                                    &raquo;</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
